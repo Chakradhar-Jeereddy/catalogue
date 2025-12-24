@@ -10,6 +10,13 @@ pipeline{
   options{
     disableConcurrentBuilds()
   }
+  parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+        booleanParam(name: 'Deploy', defaultValue: false, description: 'Do you want to deploy?')
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+  }
   stages{
     stage('Build'){
       steps{
@@ -28,13 +35,8 @@ pipeline{
       }
     }
     stage('Deploy'){
-      input {
-        message "Should we continue?"
-        ok "Yes, we should."
-        submitter "alice,bob"
-        parameters {
-          string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-        }
+      when{
+        expression { "${params.Deploy}" == "true" }
       }
       steps{
         script{
