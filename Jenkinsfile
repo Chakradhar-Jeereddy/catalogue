@@ -24,7 +24,7 @@ pipeline{
   post{
     always{
       echo "always say hi"
-      cleasWs()
+      clearWs()
     }
     success{
       echo "say the build successful"
