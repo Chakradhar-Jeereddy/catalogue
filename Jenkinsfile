@@ -37,8 +37,8 @@ pipeline{
       steps{
         script{
            sh"""
-            sudo docker build -t chakradhar05:${appVersion} .
-            sudo docker images
+            docker build -t chakradhar05:${appVersion} .
+            docker images
            """
         }
       }
