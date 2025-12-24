@@ -10,6 +10,7 @@ pipeline{
         script{
           sh"""
           echo "scripted build"
+          """
         }
       }
     }
@@ -18,6 +19,7 @@ pipeline{
         script{
           sh"""
           echo "scripted build"
+          """
         }
       }
     }
@@ -26,6 +28,7 @@ pipeline{
         script{
           sh"""
           echo "scripted build"
+          """
         }
       }
     }
