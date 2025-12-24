@@ -8,7 +8,6 @@ pipeline{
     course = "jenkins"
   }
   options{
-    timeout(time: 10, unit: 'SECONDS')
     disableConcurrentBuilds()
   }
   parameters {
@@ -28,6 +27,10 @@ pipeline{
         script{
           sh"""
            echo "hello"
+           echo ${params.PERSON}
+           echo ${params.BIOGRAPHY}
+           echo ${params.CHOICE}
+           echo ${params.password}
           """
         }
       }
@@ -36,7 +39,6 @@ pipeline{
       steps{
           sh"""
           echo $course
-          sleep 20
           """
       }
     }
