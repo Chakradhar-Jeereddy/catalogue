@@ -19,9 +19,9 @@ pipeline{
     }
     stage('Test'){
       steps{
-        script{
+          sh"""
           echo $course
-        }
+          """
       }
     }
     stage('Deploy'){
