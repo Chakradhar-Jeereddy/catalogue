@@ -6,18 +6,24 @@ pipeline{
   }
   environment{
     course = "jenkins"
-    appVersion = ""
   }
   options{
     disableConcurrentBuilds()
   }
+  parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+        booleanParam(name: 'Deploy', defaultValue: false, description: 'Do you want to deploy?')
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+  }
   stages{
-    stage('Read Version'){
+    stage('Build'){
       steps{
         script{
-            def packageJSON = readJSON file: 'package.json'
-            appVersion = packageJSON.version
-            echo "app version: ${appVersion}"
+          sh"""
+           echo "hello"
+          """
         }
       }
     }
