@@ -13,6 +13,7 @@ pipeline{
         script{
           sh"""
            echo "hello"
+           sleep 20
           """
         }
       }
@@ -44,6 +45,9 @@ pipeline{
     }
     failure{
       echo "say the build failed"
+    }
+    options{
+      timeout(time: 10, unit: 'SECONDS')
     }
   }
 }
