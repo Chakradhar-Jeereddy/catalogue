@@ -46,7 +46,7 @@ pipeline{
     failure{
       echo "say the build failed"
     }
-    options{
+    option{
       timeout(time: 10, unit: 'SECONDS')
     }
   }
