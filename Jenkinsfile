@@ -17,13 +17,16 @@ pipeline{
         stage('Read appVersion'){
             steps{
               def appVersion = readJSON file: 'package.json'
-              echo "${appVersion.version}"
+              appVersion = "${appVersion.version}"
+              echo $appVersion
             }
         }
         stage('Build catalogue image'){
             steps{     
-               docker build -t chakradhar05/catalogue:${appVersion.version} .
+               sh"""
+               docker build -t chakradhar05/catalogue:${appVersion} .
                docker images
+               """
             }
         }
         stage('Test'){
