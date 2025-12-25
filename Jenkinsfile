@@ -37,7 +37,7 @@ pipeline{
         }
         stage('Deploy'){
             when{
-                expression {params.Deploy == "false"}
+                expression {params.Deploy == "true"}
             }
             steps{
                  echo "Deploying"
