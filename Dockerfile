@@ -4,6 +4,7 @@ COPY *.js /app/server/
 COPY *.json /app/server/
 ENV mongo="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
+RUN npm install
 # containers can access with their names
 CMD [ "node","server.js" ]
 
