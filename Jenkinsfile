@@ -1,69 +1,43 @@
 pipeline{
-  agent{
-    node{
-      label "AGENT"
-    }
-  }
-  environment{
-    course = "jenkins"
-    appVersion = ""
-  }
-  options{
-    disableConcurrentBuilds()
-  }
-  stages{
-    stage('Read Version'){
-      steps{
-        script{
-            def packageJSON = readJSON file: 'package.json'
-            appVersion = packageJSON.version
-            echo "app version: ${appVersion}"
+    agent{
+        node{
+            label "agent"
         }
-      }
     }
-    stage('Install dependencies'){
-      steps{
-          sh"""
-          sudo npm install
-          """
-      }
+    environment{
+        appVersion = ""
     }
-    stage('Build Image'){
-      steps{
-        script{
-           sh"""
-            docker build -t chakradhar05:${appVersion} .
-            docker images
-           """
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+
+        booleanParam(name: 'Deploy', defaultValue: false, description: 'Do you want to deploy')
+
+    }
+    stages{
+        stage('Read appVersion'){
+            steps{
+              def appVersion = readJSON file: 'package.json'
+              echo "${appVersion.version}"
+            }
         }
-      }
-    }
-    stage('Deploy'){
-      when{
-        expression { "${params.Deploy}" == "true" }
-      }
-      steps{
-        script{
-          sh"""
-          echo "scripted build"
-          """
+        stage('Build catalogue image'){
+            steps{     
+               docker build -t chakradhar05/catalogue:${appVersion.version} .
+               docker images
+            }
         }
-      }
+        stage('Test'){
+            steps{
+              echo "Testing"
+            }
+        }
+        stage('Deploy'){
+            when{
+                expression {params.deploy = "true"}
+            }
+            steps{
+                 echo "Deploying"
+            }
+        }
     }
-  }
-  post{
-    always{
-      echo "always say hi"
-      cleanWs()
-    }
-    success{
-      echo "say the build successful"
-    }
-    failure{
-      echo "say the build failed"
-    }
-    aborted{
-      echo "timeout exceeded"
-    }
-  }
 }
