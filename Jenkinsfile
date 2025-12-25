@@ -16,9 +16,11 @@ pipeline{
     stages{
         stage('Read appVersion'){
             steps{
+              script{
               def appVersion = readJSON file: 'package.json'
               appVersion = "${appVersion.version}"
               echo $appVersion
+              }
             }
         }
         stage('Build catalogue image'){
