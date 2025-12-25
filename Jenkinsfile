@@ -1,9 +1,4 @@
 pipeline{
-    agent{
-        node{
-            label "agent"
-        }
-    }
     options{
         disableConcurrentBuilds()
     }
