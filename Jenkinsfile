@@ -10,7 +10,7 @@ pipeline{
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
-        booleanParam(name: 'Deploy', defaultValue: false, description: 'Do you want to deploy')
+        booleanParam(name: 'Deploy', defaultValue: false, description: 'Do you want to deploy?')
 
     }
     stages{
@@ -37,7 +37,7 @@ pipeline{
         }
         stage('Deploy'){
             when{
-                expression {params.Deploy == "true"}
+                expression { "${params.Deploy}" == "true" }
             }
             steps{
                  echo "Deploying"
