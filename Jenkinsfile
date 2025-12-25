@@ -4,6 +4,9 @@ pipeline{
             label "agent"
         }
     }
+    option{
+        disableConcurrentBuilds()
+    }
     environment{
         appVersion = ""
     }
@@ -42,6 +45,11 @@ pipeline{
             steps{
                  echo "Deploying"
             }
+        }
+    }
+    post{
+        always{
+            echo "Deployment is completed"
         }
     }
 }
