@@ -2,7 +2,7 @@
 
 // below function will pass the arguments to the pipeline in shared library
 def configMap = [
-    project: 'roboshop'
+    project: 'roboshop',
     component: 'catalogue'
 ]
 
