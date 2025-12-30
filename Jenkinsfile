@@ -3,7 +3,7 @@
 // /vars/nodeJSEKSPipeline
 def mymap = [
      project: 'roboshop',
-     component: 'catalogue'
+     component: 'catalogue',
      acc_id: '406682759639'
 ]
 
